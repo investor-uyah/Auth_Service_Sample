@@ -95,33 +95,31 @@ WSGI_APPLICATION = 'auth_service.wsgi.application'
 env = environ.Env()
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'), encoding='utf8') #Apply UTF-8 encoding
 
-# Add these lines for debugging:
-database_url_value = env('DATABASE_URL', cast=str)
+# Database
+database_url_value = env('DATABASE_URL', default=None)
+print("DEBUG DATABASE_URL:", database_url_value)
 
-print("DATABASE_URL from env:", os.getenv("DATABASE_URL"))
+if database_url_value:
+    DATABASES = {
+        'default': dj_database_url.parse(database_url_value)
+    }
+else:
+    raise Exception("DATABASE_URL not set in Railway environment!")
 
 
-DATABASES = {
-    'default': dj_database_url.parse(database_url_value)
-}
-
-
-# Email configuration
-
-EMAIL_BACKEND = env('EMAIL_BACKEND')
-
-# CACHES
-
+# Cache
 CACHES = {
     'default': {
-        'BACKEND': 'django_redis.cache.RedisCache', 
-        'LOCATION': 'env(REDIS_URL)',
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': env('REDIS_URL', default="redis://localhost:6379/0"),
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
     }
 }
 
+# Email
+EMAIL_BACKEND = env('EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
