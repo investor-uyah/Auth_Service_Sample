@@ -98,6 +98,8 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'), encoding='utf8') #Apply UTF
 # Add these lines for debugging:
 database_url_value = env('DATABASE_URL', cast=str)
 
+print("DATABASE_URL from env:", os.getenv("DATABASE_URL"))
+
 
 DATABASES = {
     'default': dj_database_url.parse(database_url_value)
