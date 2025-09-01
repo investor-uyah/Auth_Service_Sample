@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-hf@l5#ccekbsenm*an&pl&(k&0)rvhp6cbrh)jn&$2ynki%y!z
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['authservicesample-production.up.railway.app', '127.0.0.1', 'localhost']
 
 # Specify the route for finding authenticated users
 AUTH_USER_MODEL = 'accounts.User'
