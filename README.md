@@ -14,7 +14,7 @@ Features
 
 Setup
 1. Clone the repo
-    git clone https://github.com/your-username/django-auth-service.git
+    git clone https://github.com/investor-uyah/Auth_Service_Sample.git
     cd django-auth-service
 
 2. Create and activate a virtual environment
